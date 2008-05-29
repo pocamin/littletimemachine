@@ -47,7 +47,7 @@ public class CalendarUI extends JFrame{
 	 */
 	private void build(){
 		table= new JTable();
-		setTitle("Time Machine - Calendar"); 
+		setTitle("Little Time Machine - Calendar"); 
 		initCalendar();
 		setLocationRelativeTo(MainUI.mainUI);
 		table.setDefaultRenderer(Object.class, new ComponentRenderer());

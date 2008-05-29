@@ -61,7 +61,7 @@ public class CreateTaskUI extends JDialog {
 	private CreateTaskUI createTaskUI = this;
 
 	private void build() {
-		setTitle("Time Machine - create task");
+		setTitle("Little Time Machine - create task");
 		this.setSize(700, 300);
 
 		JPanel panel = new JPanel();
@@ -75,21 +75,21 @@ public class CreateTaskUI extends JDialog {
 		this.setLayout(new BorderLayout());
 
 		panel.setLayout(new SpringLayout());
-		panel.add(new JLabel("name"));
+		panel.add(new JLabel("Nom"));
 		initTaskTypes();
 		
 		panel.add(name);
 
-		panel.add(new JLabel("Start Date"));
+		panel.add(new JLabel("Début"));
 		panel.add(startDate);
 
-		panel.add(new JLabel("End Date"));
+		panel.add(new JLabel("Fin"));
 		panel.add(endDate);
 
-		panel.add(new JLabel("days"));
+		panel.add(new JLabel("Jours"));
 		panel.add(dayPanel);
 
-		panel.add(new JLabel("categorie"));
+		panel.add(new JLabel("Categorie"));
 		initCategories();
 		panel.add(categories);
 

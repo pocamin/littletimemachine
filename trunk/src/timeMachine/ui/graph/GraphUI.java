@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -56,7 +57,7 @@ public class GraphUI extends JFrame {
 		initThemes();
 		initCategories();
 		build();
-		setTitle("Time Machine - stats");
+		setTitle("little Time Machine - stats");
 		JPanel panelHaut = new JPanel(new GridLayout(3,4));
 		panelHaut.add(new JLabel("Voir :"));
 		panelHaut.add(voir);
@@ -112,7 +113,13 @@ public class GraphUI extends JFrame {
 			Collection<Task> tasks = getTasks();
 			tasks = filterCategory(tasks);
 			tasks = filterTheme(tasks);
-			String file = "c:/timeMachine.xls";
+			
+			int i = 0;
+			while ((new File("timeMachine-" + i + ".xls")).exists()){
+				i ++;
+			}
+			
+			String file = "timeMachine" + i + ".xls";
 			XlsExtractor extractor = new XlsExtractor(tasks,file);
 			extractor.extract();
 			JOptionPane.showMessageDialog(this,"le fichier " + file + " a été créé","Information",JOptionPane.INFORMATION_MESSAGE);  

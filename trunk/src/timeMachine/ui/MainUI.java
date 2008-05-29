@@ -52,7 +52,7 @@ public class MainUI extends JFrame implements Refreshable{
 	 * Initialisation de la fenetre
 	 */
 	private void build(){
-		setTitle("Time Machine"); 
+		setTitle("Little Time Machine"); 
 		this.setLayout(new BorderLayout());
 		add(panelTask,BorderLayout.CENTER);
 		
