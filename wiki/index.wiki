@@ -2,12 +2,13 @@
 
 = Introduction =
 
-Add your content here.
+Petit programme ayant pour but de faciliter la gestion de son temps au cours d'une journée.
 
+Il permet de planifier ses taches et de sauvegarder en continu sur quel sujet on travaille.
 
-= Details =
+L'idée est de réduire au maximum le temps de configuration et de création de tâches.
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Il répond à 90 pour cent des besoins classiques sur des petites missions.
+
+Une autre version pour le travail en équipe pourra être prévue.
+
