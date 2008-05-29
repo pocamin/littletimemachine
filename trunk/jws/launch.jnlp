@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jnlp spec="1.0+"
-	codebase="file:///D:/jws/"  href="launch.jnlp">
+	codebase="http://littletimemachine.googlecode.com/svn/trunk/jws/"  href="launch.jnlp">
 	
 	<information>
 		<title>Little Time Machine</title>
