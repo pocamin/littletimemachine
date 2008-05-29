@@ -13,7 +13,7 @@
 		<j2se version="1.5" max-heap-size="256m"
 			initial-heap-size="80m">
 		</j2se>
-		<jar href="stimeMachine.jar"/>		
+		<jar href="stimeMachine.0.1.jar"/>		
 		<jar href="santlr-2.7.2.jar"/>
 		<jar href="sasm-1.5.3.jar"/>
 		<jar href="sasm-attrs-1.5.2.jar"/>
