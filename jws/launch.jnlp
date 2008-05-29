@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+"
+	codebase="file:///D:/jws/"  href="launch.jnlp">
+	
+	<information>
+		<title>Little Time Machine</title>
+		<vendor>Benjamin Leroux</vendor>
+	</information>
+	<security>
+		<all-permissions></all-permissions>
+	</security>
+	<resources>
+		<j2se version="1.5" max-heap-size="256m"
+			initial-heap-size="80m">
+		</j2se>
+		<jar href="stimeMachine.jar"/>		
+		<jar href="santlr-2.7.2.jar"/>
+		<jar href="sasm-1.5.3.jar"/>
+		<jar href="sasm-attrs-1.5.2.jar"/>
+		<jar href="sc3p0-0.9.1.2.jar"/>
+		<jar href="scglib-nodep-2.1.jar"/>
+		<jar href="scommons-collections-3.2.jar"/>
+		<jar href="scommons-logging-1.1.jar"/>
+		<jar href="sderby-10.2.2.0.jar"/>
+		<jar href="sdom4j-1.4.jar"/>
+		<jar href="sejb3-persistence.jar"/>
+		<jar href="shibernate-3.2.6.jar"/>
+		<jar href="shibernate-annotations.jar"/>
+		<jar href="shibernate-commons-annotations.jar"/>
+		<jar href="shibernate-entitymanager.jar"/>
+		<jar href="shsqldb.jar"/>
+		<jar href="sjcommon-1.0.12.jar"/>
+		<jar href="sjfreechart-1.0.9.jar"/>
+		<jar href="sjta-1.0.jar"/>
+		<jar href="sjunit.jar"/>
+		<jar href="slog4j-1.2.13.jar"/>
+		<jar href="spoi-3.0.2.jar"/>
+	</resources>
+	<application-desc
+		main-class="timeMachine.runner.Runner">
+	</application-desc>
+</jnlp>
