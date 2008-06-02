@@ -45,9 +45,9 @@ TODO
 == Création d'un utilisateur == 
 
 Pour créer un utilisateur, il suffit de remplir dans l’écran ci-dessous : 
-*Le nom de l’utilisateur
-*Son mot de passe
-*Son mail
-*Les droits à créer des utilisateurs.
-*Les droits à visualiser/créer des taches de tout le groupe
-*Les droits à visualiser/créer les droits de tous les groupes liés au groupe de l'utilisateur.
+  * Le nom de l’utilisateur
+  * Son mot de passe
+  * Son mail
+  * Les droits à créer des utilisateurs.
+  * Les droits à visualiser/créer des taches de tout le groupe
+  * Les droits à visualiser/créer les droits de tous les groupes liés au groupe de l'utilisateur.
