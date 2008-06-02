@@ -1,0 +1,18 @@
+#summary early draft de little team machine
+
+= Introduction =
+
+Little team machine (LTM) se veut être le pendant de Little Time Machine mais pour une gestion d'équipes.
+Ainsi il permet de rajouter à l'existant la création de groupe et d'utilisateur ainsi que la création visualisation des taches afférant aux autres utilisateurs.
+
+= Avertissement = 
+
+Ce document est une pré version et peut évoluer fortement au fur et à mesure des versions.
+
+= Installation et configuration =
+
+
+Serveur d’application : Le serveur d’application doit être installé sur _TODO_. 
+Il se présente sous la forme d’un fichier ear. 
+
+_TODO : configuration de la base de données, des realm, etc_ 
