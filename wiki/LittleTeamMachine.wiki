@@ -66,7 +66,7 @@ Cependant de nouvelles fonctions apparaissent :
 
 Les alertes et les infos sont des informations que reçoit l'utilisateur lorsqu'un autre  effectue des modifications l'impactant.
 
-Les alertes sont notifiés par un popup à l'utilisateur soit à l creation si l'utilisateur est connecté soit à la connexion. Tandis que les infos sont seulement notifié à l'utilisateur dans l'écran de visualisation.
+Les alertes sont notifiés par un popup à l'utilisateur soit à l création si l'utilisateur est connecté soit à la connexion. Tandis que les infos sont seulement notifié à l'utilisateur dans l'écran de visualisation.
 
 Dans l’interface principale de LTM ouvrir configuration > opération >  alertes et infos. L'écran permet de visualiser et d'effacer les alertes et les infos de l'utilisateur.
 
@@ -77,6 +77,19 @@ _TODO : ajouter une image sur l'écran alerte et info_
 _TODO : ajouter une image sur la création d'une tâche_
 
 Dans l'écran de création d'une tâche, les modifications sont les suivantes
-  * *Assigné une tache :* si l'utilisateur dispose des droits d'assigner des taches, il peut créer une tache à un autre utilisateur. Sinon, cette option n'est pas visible. Lorsqu'une tache est assigné à un utilisateur, ce dernier reçoit une alerte.
-  * *Option de création de tâche :* Une tâche, une catégorie ou un thème peuvent être réutilisés par l'utilisateur (option U), tout le groupe (option G), ou tous les groupes liés (option O) en fonction des droit de l'utilisateur. Lorsqu'une tache est assigné à un utilisateur, ce dernier reçoit une info.
+  * *Assigner une tache :* si l'utilisateur dispose des droits d'assigner des taches, il peut créer une tache à un autre utilisateur. Sinon, cette option n'est pas visible. Lorsqu'une tache est assigné à un utilisateur, ce dernier reçoit une alerte.
+  * *Option de création :* Une tâche, une catégorie ou un thème peuvent être réutilisés par l'utilisateur (option U), tout le groupe (option G), ou tous les groupes liés (option O) en fonction des droit de l'utilisateur. Lorsqu'une tache est assigné à un utilisateur, ce dernier reçoit une alerte.
+
+== Ecran de visualisation du calendrier ==
+
+Dans l'écran de visualisation du calendrier, l'option permettant de choisir l'utilisateur apparait. La modification des données est conditionnée par les droits de l'utilisateur.
+
+== Ecran de statistiques == 
+
+Dans l'écran de statistiques, selon les droits de l'utilisateur, on peut 
+  * Choisir si les statistiques concernent l'utilisateur, le groupe ou les groupes liés. 
+  * Visualiser les statistiques en tant qu'un autre utilisateur.
+
+Dans l'extraction Excel, si les statistiques concernent le groupe ou les groupes liés, il y aura une colonne par utilisateur avec un cumule du temps passé sur la période.
+
 
