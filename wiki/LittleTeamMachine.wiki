@@ -40,7 +40,9 @@ Pour créer un groupe, il suffit de rentrer son nom dans l’écran ci-dessous e
 
 On peut sélectionner également les groupes liés à ce groupe.
 
-TODO
+_TODO : ajouter une image de la création du groupe _
+
+
 
 == Création d'un utilisateur == 
 
@@ -49,5 +51,32 @@ Pour créer un utilisateur, il suffit de remplir dans l’écran ci-dessous :
   * Son mot de passe
   * Son mail
   * Les droits à créer des utilisateurs.
-  * Les droits à visualiser/créer des taches de tout le groupe
-  * Les droits à visualiser/créer les droits de tous les groupes liés au groupe de l'utilisateur.
+  * Les droits à visualiser/créer/assigner des taches à tout le groupe
+  * Les droits à visualiser/créer/assigner des taches à tous les groupes liés au groupe de l'utilisateur.
+
+_TODO : ajouter une image sur la création d'un utilisateur_
+
+= Fonctionnement général =
+
+Little Team Machine se présente de la même façon que Litlle Time machine
+
+Cependant de nouvelles fonctions apparaissent :
+
+== Ecran de visualisation des infos et des alertes == 
+
+Les alertes et les infos sont des informations que reçoit l'utilisateur lorsqu'un autre  effectue des modifications l'impactant.
+
+Les alertes sont notifiés par un popup à l'utilisateur soit à l creation si l'utilisateur est connecté soit à la connexion. Tandis que les infos sont seulement notifié à l'utilisateur dans l'écran de visualisation.
+
+Dans l’interface principale de LTM ouvrir configuration > opération >  alertes et infos. L'écran permet de visualiser et d'effacer les alertes et les infos de l'utilisateur.
+
+_TODO : ajouter une image sur l'écran alerte et info_
+
+== Ecran de création d'une tâche ==
+
+_TODO : ajouter une image sur la création d'une tâche_
+
+Dans l'écran de création d'une tâche, les modifications sont les suivantes
+  * *Assigné une tache :* si l'utilisateur dispose des droits d'assigner des taches, il peut créer une tache à un autre utilisateur. Sinon, cette option n'est pas visible. Lorsqu'une tache est assigné à un utilisateur, ce dernier reçoit une alerte.
+  * *Option de création de tâche :* Une tâche, une catégorie ou un thème peuvent être réutilisés par l'utilisateur (option U), tout le groupe (option G), ou tous les groupes liés (option O) en fonction des droit de l'utilisateur. Lorsqu'une tache est assigné à un utilisateur, ce dernier reçoit une info.
+
