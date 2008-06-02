@@ -16,3 +16,38 @@ Serveur d’application : Le serveur d’application doit être installé sur _T
 Il se présente sous la forme d’un fichier ear. 
 
 _TODO : configuration de la base de données, des realm, etc_ 
+
+= Utilisateurs et groupes =
+
+Un utilisateur par défaut est créé dans LTM avec pour informations de connexion :
+
+Login	Admin
+MDP	Admin
+
+A la première connexion, le mot de passe sera à changer. Cet utilisateur fait partie du groupe ADMIN. Seuls les utilisateurs de ce groupe peuvent créer d’autres groupes et créer des utilisateurs appartenant à ce groupe.
+
+Un utilisateur n’est rattaché qu’a un seul groupe – c’est une limitation mais à priori cela devrait permettre de répondre à 90 % des cas.
+
+Un groupe peut être lié à d’autres groupes. Cela permet de visualiser les calendriers et les autres tâches des groupes
+
+== Création d'un groupe ==
+
+La création d’un groupe ne peut se faire que par un utilisateur appartenant au groupe admin.
+
+Dans l’interface principale de LTM ouvrir configuration > groupe > créer
+
+Pour créer un groupe, il suffit de rentrer son nom dans l’écran ci-dessous et de valider.
+
+On peut sélectionner également les groupes liés à ce groupe.
+
+TODO
+
+== Création d'un utilisateur == 
+
+Pour créer un utilisateur, il suffit de remplir dans l’écran ci-dessous : 
+*Le nom de l’utilisateur
+*Son mot de passe
+*Son mail
+*Les droits à créer des utilisateurs.
+*Les droits à visualiser/créer des taches de tout le groupe
+*Les droits à visualiser/créer les droits de tous les groupes liés au groupe de l'utilisateur.
