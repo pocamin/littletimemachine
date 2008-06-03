@@ -119,7 +119,7 @@ public class GraphUI extends JFrame {
 				i ++;
 			}
 			
-			String file = "timeMachine" + i + ".xls";
+			String file = "timeMachine-" + i + ".xls";
 			XlsExtractor extractor = new XlsExtractor(tasks,file);
 			extractor.extract();
 			JOptionPane.showMessageDialog(this,"le fichier " + file + " a été créé","Information",JOptionPane.INFORMATION_MESSAGE);  
