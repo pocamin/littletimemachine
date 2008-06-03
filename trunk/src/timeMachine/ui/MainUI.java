@@ -4,12 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -91,6 +94,17 @@ public class MainUI extends JFrame implements Refreshable{
 				new GraphUI(controller);
 			}
 		});
+		
+		JMenu operationConfig = new JMenu("Configuration");
+		menuBar.add(operationConfig);
+		JCheckBoxMenuItem checkBoxMenuItem = new JCheckBoxMenuItem("Toujours visible",true);
+		operationConfig.add(checkBoxMenuItem);
+		checkBoxMenuItem.addItemListener(new ItemListener(){
+
+			public void itemStateChanged(ItemEvent arg0) {
+				setAlwaysOnTop(((JCheckBoxMenuItem)arg0.getItemSelectable()).isSelected());
+			}});
+		
 		
 		setJMenuBar(menuBar);
 	}
