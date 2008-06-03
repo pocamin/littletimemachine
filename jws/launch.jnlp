@@ -5,6 +5,7 @@
 	<information>
 		<title>Little Time Machine</title>
 		<vendor>Benjamin Leroux</vendor>
+		<icon href="splash.png" kind="splash"/> 
 	</information>
 	<security>
 		<all-permissions></all-permissions>
