@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+   		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+   		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+
+	<bean id="controller"
+		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl"
+			value="http://localhost:8080/LittleTeamMachine-srv/remoting/ControllerService" />
+		<property name="serviceInterface"
+			value="org.littleTeamMachine.common.services.Controller" />
+	</bean>
+
+	<bean id="hello"
+		class="org.littleTeamMachine.service.HelloImpl">
+	</bean>
+	
+
+	<aop:aspectj-autoproxy/>
+
+	<bean id="logger"
+		class="org.littleTeamMachine.aop.LogServicesAspect">
+	</bean>
+	
+
+	<bean id="jmsFactory" class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop">
+        <property name="connectionFactory">
+            <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+                <property name="brokerURL">
+                    <value>tcp://localhost:61616</value>
+                </property>
+            </bean>
+        </property>
+    </bean>
+	
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">    
+        <property name="connectionFactory">        
+            <ref local="jmsFactory"/>    
+        </property>
+    </bean>
+    
+	<bean id="destination" class="org.apache.activemq.command.ActiveMQTopic">    
+        <constructor-arg index="0">        
+            <value>modificationTopic</value>    
+        </constructor-arg>
+    </bean>	
+	
+    <bean id="listenerContainer"  class="org.springframework.jms.listener.DefaultMessageListenerContainer">    
+        <property name="concurrentConsumers" value="5"/>    
+        <property name="connectionFactory" ref="jmsFactory" />    
+        <property name="destination" ref="destination" />    
+        <property name="messageListener" ref="notificationReceiver" />
+    </bean>
+
+	<bean id="notificationReceiver" class="org.littleTeamMachine.service.jmsReceiver.NotificationReceiver" >
+		<property name="controller"  ref="controller"/>
+	</bean>
+	
+<!-- 
+	<aop:config>
+		<aop:pointcut id="servicePointcut"  expression="execution(* org.littleTeamMachine.common.services.Controller.*(..))"/>    		
+		<aop:aspect id="lsa" ref="listenerSerializationAspect">
+		    <aop:around method="correctSerialize"  pointcut-ref="servicePointcut"/>    		
+	    </aop:aspect>	    
+	</aop:config>
+	
+	 
+	<aop:config>
+		<aop:pointcut id="loggerServicePointcut"  expression="execution(* org.littleTeamMachine..*.*(..))"/>    		
+		<aop:aspect id="loggerAspect" ref="logger">
+		    <aop:around method="log"  pointcut-ref="servicePointcut"/>    		
+	    </aop:aspect>	    
+	</aop:config>
+	
+	
+	<bean id="listenerSerializationAspect"
+		class="timeMachine.aop.ListenerSerializationAspect">
+	</bean>
+ 
+	
+
+-->
+	
+</beans>

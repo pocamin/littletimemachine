@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns:amq="http://activemq.org/config/1.0">
+
+	<!-- ActiveMQ JMS Broker configuration -->
+	<amq:broker id="broker" 
+		useShutdownHook="false">
+
+		<amq:managementContext>
+			<bean
+				class="org.apache.activemq.broker.jmx.ManagementContext">
+				<property name="createConnector" value="false" />
+			</bean>
+		</amq:managementContext> -->
+
+	    <amq:persistenceAdapter>
+    	  <amq:journaledJDBC journalLogFiles="50" dataDirectory="D:/temp/jms"/>
+    	</amq:persistenceAdapter>
+
+		<amq:transportConnectors>
+			<amq:transportConnector
+				uri="tcp://localhost:61616"
+				discoveryUri="multicast://default" />
+		</amq:transportConnectors>
+
+		<amq:networkConnectors>
+			<amq:networkConnector uri="multicast://default" />
+		</amq:networkConnectors>
+
+	</amq:broker>
+
+</beans>
+
+
+	

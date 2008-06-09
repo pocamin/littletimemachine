@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping 
+	package="org.littleTeamMachine.common.modele">
+
+	<class name="Root"  >
+	    <id name="id" >
+        	<generator class="native"/>
+    	</id>
+	</class>
+	 
+
+    <union-subclass name="Categorie" extends="Root" >
+		<property name="name" />
+    </union-subclass>
+    
+    
+	<union-subclass name="Theme" extends="Root" >
+		<property name="name" />
+    </union-subclass>
+	
+	<union-subclass name="TaskType" extends="Root" >
+		<property name="name" />
+		<many-to-one name="categorie" class="Categorie" lazy="false" cascade="all"/>
+		<many-to-one name="theme" class="Theme" lazy="false" cascade="all"/> 
+		<property name="finished" />
+    </union-subclass>
+    
+	<union-subclass name="Task" extends="Root">
+		<property name="day" type="date"/>
+		<property name="forcasted"/>
+		<property name="timeTakenInMinute" />
+		<property name="forecastTimeInMinute" />
+		<many-to-one name="taskType" class="TaskType" lazy="false" cascade="all"/>
+    </union-subclass>
+       
+	
+
+</hibernate-mapping>
+	
