@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="controller"
+		class="org.littleTeamMachine.srv.controller.ControllerImpl">
+		<property name="categorieDAO" ref="categorieDAO" />
+		<property name="taskDAO" ref="taskDAO" />
+		<property name="taskTypeDAO" ref="taskTypeDAO" />
+		<property name="themeDAO" ref="themeDAO" />
+	</bean>
+
+	<bean name="/ControllerService"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="controller" />
+		<property name="serviceInterface"
+			value="org.littleTeamMachine.common.services.Controller" />
+	</bean>
+
+
+
+	<!-- HIBERNATE -->
+
+
+	<!-- DataSource Property -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName">
+			<value>org.apache.derby.jdbc.EmbeddedDriver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:derby:timeMachineDB;create=true</value>
+		</property>
+	</bean>
+
+	<!-- Database Property -->
+	<bean id="hibernateProperties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.DerbyDialect
+				</prop>
+				<prop key="hibernate.query.substitutions">
+					true 'T', false 'F'
+				</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.c3p0.minPoolSize">5</prop>
+				<prop key="hibernate.c3p0.maxPoolSize">20</prop>
+				<prop key="hibernate.c3p0.timeout">600</prop>
+				<prop key="hibernate.c3p0.max_statement">50</prop>
+				<prop key="hibernate.c3p0.testConnectionOnCheckout">
+					false
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+
+
+	<!-- Hibernate SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<ref bean="hibernateProperties" />
+		</property>
+		<!--  OR mapping files. -->
+		<property name="mappingResources">
+			<list>
+				<value>Categorie.hbm.xml</value>
+			</list>
+		</property>
+
+
+	</bean>
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+
+	<bean id="transactionFactory"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="txManager" />
+		</property>
+		<property name="target">
+			<ref local="controller" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+
+
+	<bean id="hibernateTemplate"
+		class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="categorieDAO" class="org.littleTeamMachine.srv.dao.CategorieDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	
+	<bean id="taskDAO" class="org.littleTeamMachine.srv.dao.TaskDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	
+	<bean id="taskTypeDAO" class="org.littleTeamMachine.srv.dao.TaskTypeDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	
+	<bean id="themeDAO" class="org.littleTeamMachine.srv.dao.ThemeDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	
+	
+	<!-- JMS -->
+	
+	<bean id="jmsFactory" class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop">
+        <property name="connectionFactory">
+            <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+                <property name="brokerURL">
+                    <value>tcp://localhost:61616</value>
+                </property>
+            </bean>
+        </property>
+    </bean>
+	
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">    
+        <property name="connectionFactory">        
+            <ref local="jmsFactory"/>    
+        </property>
+    </bean>
+    
+	<bean id="destination" class="org.apache.activemq.command.ActiveMQTopic">    
+        <constructor-arg index="0">        
+            <value>modificationTopic</value>    
+        </constructor-arg>
+    </bean>
+    
+	<bean id="notificationProducer" class="org.littleTeamMachine.srv.controller.modificationNotifier.Notifier">
+        <property name="template" ref="jmsTemplate"/>
+        <property name="destination" ref="destination"/>
+    </bean>
+    
+    <bean id="broker" class="org.apache.activemq.xbean.BrokerFactoryBean">
+        <property name="config" value="classpath:activemq.xml"/>
+    </bean>    
+    
+
+</beans>
