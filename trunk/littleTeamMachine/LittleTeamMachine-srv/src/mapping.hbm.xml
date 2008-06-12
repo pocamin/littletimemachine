@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping 
+	package="org.littleTeamMachine.common.modele">
+
+	<class name="Root"  >
+	    <id name="id" >
+        	<generator class="native"/>
+    	</id>
+	</class>
+	 
+
+    <union-subclass name="Category" extends="Root" >
+		<property name="name" />
+		<many-to-one name="user" class="User" lazy="false" cascade="all" column="user_id"/>
+		<many-to-one name="group" class="Group" lazy="false" cascade="all" column="group_id"/>
+		<property name="visibility" />
+    </union-subclass>
+    
+    
+	<union-subclass name="Theme" extends="Root" >
+		<property name="name" />
+		<many-to-one name="user" class="User" lazy="false" cascade="all" column="user_id"/>
+		<many-to-one name="group" class="Group" lazy="false" cascade="all" column="group_id"/>
+		<property name="visibility" />
+    </union-subclass>
+	
+	<union-subclass name="TaskType" extends="Root" >
+		<property name="name" />
+		<many-to-one name="category" class="Category" lazy="false" cascade="all"/>
+		<many-to-one name="theme" class="Theme" lazy="false" cascade="all"/> 
+		<property name="finished" />
+		<many-to-one name="user" class="User" lazy="false" cascade="all" column="user_id"/>
+		<many-to-one name="group" class="Group" lazy="false" cascade="all" column="group_id"/>
+		<property name="visibility" />
+
+    </union-subclass>
+    
+	<union-subclass name="Task" extends="Root">
+		<property name="day" type="date"/>
+		<property name="forcasted"/>
+		<property name="timeTakenInMinute" />
+		<property name="forecastTimeInMinute" />
+		<many-to-one name="taskType" class="TaskType" lazy="false" cascade="all"/>
+		<many-to-one name="user" class="User" lazy="false" cascade="all" column="user_id"/>
+    </union-subclass>
+
+	<union-subclass name="User" extends="Root" table="LTM_USER" >
+		<property name="login" />
+		<property name="password" />
+		<property name="adminGroup" />
+		<property name="taskCreate" />
+		<property name="taskTypeCreate" />
+		<property name="categoryCreate" />
+		<property name="themeCreate" />
+		<many-to-one name="group" class="Group" lazy="false" cascade="all"  column="group_id"/>
+    </union-subclass>
+       
+	<union-subclass name="Group" extends="Root"  table="USER_GROUP">
+		<property name="name" />
+		<set name="linkedGroups">
+			<key column="group_id" />
+			<one-to-many class="Group"/>
+		</set>
+	</union-subclass>    
+	
+	<query name="findAllTaskTypeForUser">
+		select 
+			tt 
+		from
+			TaskType tt
+		where 
+			tt.finished = false and  
+			(
+				(
+				tt.visibility = 0 and 
+				tt.user = :user
+				) or
+				(
+				tt.visibility = 1 and 
+				tt.group = :group
+				) or
+				(
+				tt.visibility = 2 and 
+				tt.group.id in (:linkedGroup)
+				) 
+			)
+	</query>
+
+
+	<query name="findAllThemesForUser">
+		select 
+			t 
+		from
+			Theme t
+		where 
+				(
+				t.visibility = 0 and 
+				t.user = :user
+				) or
+				(
+				t.visibility = 1 and 
+				t.group = :group
+				) or
+				(
+				t.visibility = 2 and 
+				t.group.id in (:linkedGroup)
+				) 
+	</query>
+	
+	
+	<query name="findAllCategoriesForUser">
+		select 
+			c 
+		from
+			Category c
+		where 
+				(
+				c.visibility = 0 and 
+				c.user = :user
+				) or
+				(
+				c.visibility = 1 and 
+				c.group = :group
+				) or
+				(
+				c.visibility = 2 and 
+				c.group.id in (:linkedGroup)
+				) 
+	</query> 
+	
+	
+
+</hibernate-mapping>
+	
