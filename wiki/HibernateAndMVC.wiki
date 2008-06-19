@@ -6,7 +6,7 @@ Cet article s'intéresse à la modélisation de la liaison modèle/vue d'une int
 
 = Problématiques =
 
-== Notification des changements -- 
+== Notification des changements -==
 
 Le modèle MVC propose que lorsqu'un changement intervient dans le modèle, la vue en soit informé afin d'appliquer les modifications ad hoc.
 
